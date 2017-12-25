@@ -2,15 +2,48 @@
 <% include partials/header %>
     <script type="text/javascript">
         
-        var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+        var tileSize = 100;
+        var tileColor = '';
+        var tileFilled = new Array(0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0);
+        var game = new Phaser.Game(500, 500, Phaser.AUTO, '', { preload: preload, create: create, update: update });
         
         function preload() {
-
+            game.load.image("blueTile", "assets/blue.png");
+            game.load.image("redTile", "assets/red.png");
+            game.load.image("jokerTile", "assets/joker.png");
         }
 
 
         function create() {
+/*             for(var i = 0; i<25; i++){
+                do {
+                    var randomValue = Math.floor(Math.random()*25);
+                } while (tileFilled[randomValue]!=0)
 
+                tileFilled[randomValue]=1;
+                if(randomValue == 5 || randomValue == 10 || randomValue == 20)
+                {
+                    tileColor = 'jokerTile';
+                }else if(randomValue%2 == 0){
+                    tileColor = 'blueTile';
+                }else{
+                    tileColor = 'redTile';
+                }
+                var tile = game.add.sprite((randomValue%5)*tileSize,(Math.floor(randomValue/4))*tileSize,tileColor);
+            } */
+
+             for(var i = 0; i<25; i++){
+                var randomValue = Math.floor(Math.random()*2);
+                if(i == 11 || i == 12 || i == 13)
+                {
+                    tileColor = 'jokerTile';
+                }else if(randomValue == 0){
+                    tileColor = 'blueTile';
+                }else{
+                    tileColor = 'redTile';
+                }
+                var tile = game.add.sprite((i%5)*tileSize,(Math.floor(i/5))*tileSize,tileColor);
+            } 
         }     
 
         function update() {
